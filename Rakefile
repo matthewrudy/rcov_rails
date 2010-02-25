@@ -15,7 +15,7 @@ spec = Gem::Specification.new do |s|
 
   # Change these as appropriate
   s.name              = "rcov_rails"
-  s.version           = "0.1.0"
+  s.version           = "0.1.1"
   s.description       = "Ruby, Rails, Rcov put together into a single neat Rake task"
   s.summary           = "Ruby, Rails, Rcov put together into a single neat Rake task"
   s.author            = "Matthew Rudy Jacobs"
