@@ -15,8 +15,8 @@ spec = Gem::Specification.new do |s|
 
   # Change these as appropriate
   s.name              = "rcov_rails"
-  s.version           = "0.1.1"
-  s.description       = "Ruby, Rails, Rcov put together into a single neat Rake task"
+  s.version           = "0.1.4"
+  s.description       = "One Rake task to give you rcov code coverage for your rails app. rake test:coverage"
   s.summary           = "Ruby, Rails, Rcov put together into a single neat Rake task"
   s.author            = "Matthew Rudy Jacobs"
   s.email             = "matthewrudyjacobs@gmail.com"
@@ -30,12 +30,7 @@ spec = Gem::Specification.new do |s|
   s.files             = %w(MIT-LICENSE README) + Dir.glob("{lib/**/*}")
   s.require_paths     = ["lib"]
 
-  # If you want to depend on other gems, add them here, along with any
-  # relevant versions
-  # s.add_dependency("some_other_gem", "~> 0.1.0")
-
-  # If your tests use any gems, include them here
-  # s.add_development_dependency("mocha") # for example
+  s.add_dependency("rcov")
 end
 
 # This task actually builds the gem. We also regenerate a static

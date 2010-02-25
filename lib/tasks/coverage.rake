@@ -61,5 +61,10 @@ begin
   end
 
 rescue LoadError
-  puts "You must install the 'rcov' gem to use rcov_rails\n  sudo gem install rcov"
+  puts <<-MESSAGE
+  You must install the 'rcov' gem to use rcov_rails
+  
+    sudo gem install rcov
+  
+  MESSAGE
 end
