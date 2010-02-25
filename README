@@ -1,0 +1,22 @@
+RcovRails
+=========
+
+A simple "no thoughts required" solution to adding RCOV code coverage to your Rails application.
+Just install the plugin, install the RCOV gem, and you're done.
+Enjoy.
+
+Example
+=======
+
+Install as a Rails 2.x Plugin:
+  sudo gem install rcov
+  ruby script/plugin install git://github.com/matthewrudy/rcov_rails
+  rake test:coverage # boom!
+  
+Install as a Rails 3.x Plugin:
+  sudo gem install rcov
+  rails plugin install git://github.com/matthewrudy/rcov_rails
+  rake test:coverage # boom!
+  
+
+Copyright (c) 2010 [Matthew Rudy Jacobs], released under the MIT license
