@@ -2,15 +2,15 @@
 
 Gem::Specification.new do |s|
   s.name = %q{rcov_rails}
-  s.version = "0.1.4"
+  s.version = "0.1.6"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Matthew Rudy Jacobs"]
-  s.date = %q{2010-02-25}
+  s.date = %q{2010-03-01}
   s.description = %q{One Rake task to give you rcov code coverage for your rails app. rake test:coverage}
   s.email = %q{matthewrudyjacobs@gmail.com}
   s.extra_rdoc_files = ["README"]
-  s.files = ["MIT-LICENSE", "README", "lib/rcov_rails", "lib/rcov_rails/railtie.rb", "lib/tasks", "lib/tasks/coverage.rake"]
+  s.files = ["MIT-LICENSE", "README", "lib/rcov_rails", "lib/rcov_rails/railtie.rb", "lib/rcov_rails.rb", "lib/tasks", "lib/tasks/coverage.rake"]
   s.homepage = %q{http://github.com/matthewrudy/rcov_rails}
   s.rdoc_options = ["--main", "README"]
   s.require_paths = ["lib"]
