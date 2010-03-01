@@ -37,6 +37,7 @@ begin
         Rcov::RcovTask.new("_#{scope}" => "db:test:prepare") do |t|
           t.libs << "test"
           t.test_files = Dir["test/#{scope.singularize}/**/*_test.rb"]
+          t.add_descriptions = false
           t.rcov_opts = ["--no-html", "--aggregate coverage.data", "--exclude '^(?!(app|lib))'"]
         end
         
@@ -51,6 +52,7 @@ begin
       Rcov::RcovTask.new(:generate) do |t|
         t.libs << "test"
         t.test_files = []
+        t.add_descriptions = false
         t.rcov_opts = ["--html", "--aggregate coverage.data", "--exclude '^(?!(app|lib))'"]
       end
 
