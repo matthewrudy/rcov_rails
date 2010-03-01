@@ -8,15 +8,26 @@ Enjoy.
 Example
 =======
 
+Install as a Rails 3 Gem:
+
+  $: vim Gemfile
+
+    group :development do
+      get "rcov_rails"
+    end
+
+  $: rake test:coverage # boom!
+
 Install as a Rails 2.x Plugin:
-  sudo gem install rcov
-  ruby script/plugin install git://github.com/matthewrudy/rcov_rails
-  rake test:coverage # boom!
+  
+  $: sudo gem install rcov
+  $: ruby script/plugin install git://github.com/matthewrudy/rcov_rails
+  $: rake test:coverage # boom!
   
 Install as a Rails 3.x Plugin:
-  sudo gem install rcov
-  rails plugin install git://github.com/matthewrudy/rcov_rails
-  rake test:coverage # boom!
-  
 
+  $: sudo gem install rcov
+  $: rails plugin install git://github.com/matthewrudy/rcov_rails
+  $: rake test:coverage # boom!
+  
 Copyright (c) 2010 [Matthew Rudy Jacobs], released under the MIT license
