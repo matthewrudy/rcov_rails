@@ -63,5 +63,11 @@ begin
   end
 
 rescue LoadError
-  "You must install the 'rcov' gem to use rcov_rails\n\tsudo gem install rcov"
+  
+  namespace :test do
+    task :coverage do
+      puts "You must install the 'rcov' gem to use rcov_rails\n\tsudo gem install rcov"
+    end
+  end
+  
 end
