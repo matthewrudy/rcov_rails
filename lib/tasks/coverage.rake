@@ -11,14 +11,12 @@
 
 begin
 
-  require 'rcov/rcovtask'
+  require File.expand_path(File.join(File.dirname(__FILE__), "..", "rcov_rails/rcovtask"))
 
-  def coverage_task(name, aspects, options={})
+  def coverage_task(name, aspects, task_description)
     aspect_tasks = aspects.map{ |aspect| "test:coverage:_#{aspect}" }
 
-    if options[:description]
-      desc options[:description]
-    end
+    desc(task_description)
     
     task name => ["test:coverage:reset"] + aspect_tasks + ["test:coverage:generate"] do
       if PLATFORM['darwin']
@@ -34,14 +32,14 @@ begin
     namespace :coverage do
 
       ["units", "functionals", "integration"].each do |scope|
-        Rcov::RcovTask.new("_#{scope}" => "db:test:prepare") do |t|
+        RcovRails::RcovTask.new("_#{scope}" => "db:test:prepare") do |t|
           t.libs << "test"
           t.test_files = Dir["test/#{scope.singularize}/**/*_test.rb"]
-          t.add_descriptions = false if t.respond_to?(:add_descriptions=)
+          t.add_descriptions = false
           t.rcov_opts = ["--no-html", "--aggregate coverage.data", "--exclude '^(?!(app|lib))'"]
         end
         
-        coverage_task(scope, [scope], :description => "run the #{scope} tests with coverage")
+        coverage_task(scope, [scope], "run the #{scope} tests with coverage")
       end
 
       task :reset do
@@ -49,16 +47,16 @@ begin
         rm_f "coverage"
       end
 
-      Rcov::RcovTask.new(:generate) do |t|
+      RcovRails::RcovTask.new(:generate) do |t|
         t.libs << "test"
         t.test_files = []
-        t.add_descriptions = false if t.respond_to?(:add_descriptions=)
+        t.add_descriptions = false
         t.rcov_opts = ["--html", "--aggregate coverage.data", "--exclude '^(?!(app|lib))'"]
       end
 
     end
 
-    coverage_task(:coverage, [:units, :functionals, :integration])
+    coverage_task(:coverage, [:units, :functionals, :integration], "run all the tests with coverage")
 
   end
 
