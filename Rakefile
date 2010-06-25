@@ -15,7 +15,7 @@ spec = Gem::Specification.new do |s|
 
   # Change these as appropriate
   s.name              = "rcov_rails"
-  s.version           = "0.1.8"
+  s.version           = "0.1.9"
   s.description       = "One Rake task to give you rcov code coverage for your rails app. rake test:coverage"
   s.summary           = "Ruby, Rails, Rcov put together into a single neat Rake task"
   s.author            = "Matthew Rudy Jacobs"
@@ -44,6 +44,7 @@ Rake::GemPackageTask.new(spec) do |pkg|
   pkg.gem_spec = spec
 end
 
+desc "generate the .gemspec file"
 task :gemspec do
   # Generate the gemspec file for github.
   file = File.dirname(__FILE__) + "/#{spec.name}.gemspec"
