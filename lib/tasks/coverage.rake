@@ -30,9 +30,15 @@ begin
   namespace :test do
 
     namespace :coverage do
+      
+      task_dependencies = []
+      
+      if defined?(ActiveRecord)
+        task_dependencies << "db:test:prepare"
+      end
 
       ["units", "functionals", "integration"].each do |scope|
-        RcovRails::RcovTask.new("_#{scope}" => "db:test:prepare") do |t|
+        RcovRails::RcovTask.new("_#{scope}" => task_dependencies) do |t|
           t.libs << "test"
           t.test_files = Dir["test/#{scope.singularize}/**/*_test.rb"]
           t.add_descriptions = false
