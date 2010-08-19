@@ -19,7 +19,7 @@ begin
     desc(task_description)
     
     task name => ["test:coverage:reset"] + aspect_tasks + ["test:coverage:generate"] do
-      if PLATFORM['darwin']
+      if defined?(RUBY_PLATFORM) && RUBY_PLATFORM['darwin']
         system("open coverage/index.html")
       else
         puts "coverage created. open coverage/index.html in a web browser"
