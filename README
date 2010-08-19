@@ -13,9 +13,10 @@ Install as a Rails 3 Gem:
   $: vim Gemfile
 
     group :development do
-      get "rcov_rails"
+      gem "rcov_rails"
     end
 
+  $: bundle install
   $: rake test:coverage # boom!
 
 Install as a Rails 2.x Plugin:
@@ -24,9 +25,16 @@ Install as a Rails 2.x Plugin:
   $: ruby script/plugin install git://github.com/matthewrudy/rcov_rails
   $: rake test:coverage # boom!
   
-Install as a Rails 3.x Plugin:
+Install as a Rails 3.x Plugin: // I suggest you don't do this, as you'll need to add rcov via bundler anyway
 
   $: sudo gem install rcov
+  $: vim Gemfile
+
+    group :development do
+      gem "rcov"
+    end
+
+  $: bundle install
   $: rails plugin install git://github.com/matthewrudy/rcov_rails
   $: rake test:coverage # boom!
   
