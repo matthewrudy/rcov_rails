@@ -14,11 +14,20 @@ begin
   require File.expand_path(File.join(File.dirname(__FILE__), "..", "rcov_rails/rcovtask"))
 
   def coverage_task(name, aspects, task_description)
-    aspect_tasks = aspects.map{ |aspect| "test:coverage:_#{aspect}" }
+    aspect_tasks = Array(aspects).map{ |aspect| "test:coverage:_#{aspect}" }
 
     desc(task_description)
     
-    task name => ["test:coverage:reset"] + aspect_tasks + ["test:coverage:generate"] do
+    task name => ["test:coverage:reset"] + aspect_tasks do
+      
+      generator_task = if aspects == :units
+        "generate_models"
+      else
+        "generate_all"
+      end
+      
+      Rake::Task["test:coverage:#{generator_task}"].invoke()
+      
       if defined?(RUBY_PLATFORM) && RUBY_PLATFORM['darwin']
         system("open coverage/index.html")
       else
@@ -42,18 +51,25 @@ begin
           t.libs << "test"
           t.test_files = Dir["test/#{scope.singularize}/**/*_test.rb"]
           t.add_descriptions = false
-          t.rcov_opts = ["--no-html", "--aggregate coverage.data", "--exclude '^(?!(app|lib))'"]
+          t.rcov_opts = ["--no-html", "--aggregate coverage.data"]
         end
         
-        coverage_task(scope, [scope], "run the #{scope} tests with coverage")
+        coverage_task(scope, scope.to_sym, "run the #{scope} tests with coverage")
       end
 
       task :reset do
         rm_f "coverage.data"
         rm_f "coverage"
       end
+      
+      RcovRails::RcovTask.new(:generate_models) do |t|
+        t.libs << "test"
+        t.test_files = []
+        t.add_descriptions = false
+        t.rcov_opts = ["--html", "--aggregate coverage.data", "--exclude '^(?!(app|lib))'", "--exclude '^app[\\/\/]controllers'"]
+      end
 
-      RcovRails::RcovTask.new(:generate) do |t|
+      RcovRails::RcovTask.new(:generate_all) do |t|
         t.libs << "test"
         t.test_files = []
         t.add_descriptions = false
