@@ -21,9 +21,9 @@ begin
     task name => ["test:coverage:reset"] + aspect_tasks do
       
       generator_task = if aspects == :units
-        "generate_models"
+        "generate_without_controllers"
       else
-        "generate_all"
+        "generate"
       end
       
       Rake::Task["test:coverage:#{generator_task}"].invoke()
@@ -61,19 +61,19 @@ begin
         rm_f "coverage.data"
         rm_f "coverage"
       end
-      
-      RcovRails::RcovTask.new(:generate_models) do |t|
-        t.libs << "test"
-        t.test_files = []
-        t.add_descriptions = false
-        t.rcov_opts = ["--html", "--aggregate coverage.data", "--exclude '^(?!(app|lib))'", "--exclude '^app[\\/\/]controllers'"]
-      end
 
-      RcovRails::RcovTask.new(:generate_all) do |t|
+      RcovRails::RcovTask.new(:generate) do |t|
         t.libs << "test"
         t.test_files = []
         t.add_descriptions = false
         t.rcov_opts = ["--html", "--aggregate coverage.data", "--exclude '^(?!(app|lib))'"]
+      end
+      
+      RcovRails::RcovTask.new(:generate_without_controllers) do |t|
+        t.libs << "test"
+        t.test_files = []
+        t.add_descriptions = false
+        t.rcov_opts = ["--html", "--aggregate coverage.data", "--exclude '^(?!(app|lib))'", "--exclude '^app[\\/\/]controllers'"]
       end
 
     end
