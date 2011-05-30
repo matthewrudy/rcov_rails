@@ -42,7 +42,13 @@ begin
       
       task_dependencies = []
       
-      if defined?(ActiveRecord)
+      # in Rails 2, Rails and Railties are not loaded at this point
+      # but also, rake db:test:prepare is globally defined, and deals with ActiveRecord's status itself
+      # in Rails 3, I believe we can't include the db:test:prepare if ActiveRecord is not in the stack
+      #
+      #  read the below as
+      #  "if we're in Rails 2, or we're in Rails 3 and ActiveRecord is defined"
+      if !defined?(Rails) || defined?(ActiveRecord)
         task_dependencies << "db:test:prepare"
       end
 
